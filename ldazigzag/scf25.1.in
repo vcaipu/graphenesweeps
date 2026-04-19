@@ -1,0 +1,35 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'graphene25.1zoom'
+  outdir = './tmp' 
+  pseudo_dir = './'
+  verbosity = 'high'
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 40.0
+  nosym = .true.
+  noinv = .true.
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+/
+&ELECTRONS
+  conv_thr = 1.0D-8
+/
+&IONS
+  ion_dynamics = 'bfgs'
+/
+ATOMIC_SPECIES
+  C  12.011 C.upf 
+CELL_PARAMETERS {bohr}
+  5.787030  0.000000  0.000000
+  2.893515  3.840252  0.000000
+  0.000000  0.000000  28.346456
+ATOMIC_POSITIONS {crystal}
+  C  -0.000714  0.001427  0.000000
+  C  0.334047  0.331906  0.000000
+K_POINTS {automatic}
+  24 24 1 0 0 0
