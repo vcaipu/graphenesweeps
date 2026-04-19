@@ -1,0 +1,29 @@
+&CONTROL
+  calculation = 'bands'
+  prefix = 'graphene24.0'
+  outdir = './tmp'
+  pseudo_dir = './'
+  verbosity = 'high'
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 40.0
+  nosym = .true.
+  noinv = .true.
+  nbnd = 8
+/
+&ELECTRONS
+/
+ATOMIC_SPECIES
+  C  12.011  C.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS {bohr}
+  5.770960  0.000000  0.000000
+  2.885480  3.870875  0.000000
+  0.000000  0.000000  30.000000
+ATOMIC_POSITIONS {crystal}
+  C  0.000611  0.165524  0.000000
+  C  0.332722  0.501143  0.000000
+K_POINTS {automatic}
+  60 60 1 0 0 0

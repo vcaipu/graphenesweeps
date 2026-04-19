@@ -1,0 +1,40 @@
+&CONTROL
+  calculation = 'vc-relax'
+  prefix = 'graphene_lda_pristine'
+  outdir = './tmp' 
+  pseudo_dir = './'
+  verbosity = 'high'
+  tstress = .true.
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 80.0
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+/
+&ELECTRONS
+  conv_thr = 1.0D-8
+/
+&IONS
+  ion_dynamics = 'bfgs'
+/
+&CELL
+  cell_dynamics = 'bfgs'
+  cell_dofree = '2Dxy'
+  press_conv_thr = 0.5
+/
+ATOMIC_SPECIES
+  C  12.011  C.upf
+CELL_PARAMETERS {angstrom}
+  2.460000000  0.000000000  0.000000000
+  1.230000000  2.130422493  0.000000000
+  0.000000  0.000000  15.000000
+ATOMIC_POSITIONS {crystal}
+  C  0.000000000  0.000000000  0.000000000 1 1 0
+  C  0.333333333  0.333333333  0.000000000 1 1 0
+K_POINTS {automatic}
+  16 16 1 0 0 0
