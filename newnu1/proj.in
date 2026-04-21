@@ -1,0 +1,4 @@
+&PROJWFC
+  prefix='graphene10.0upper',
+  outdir='./tmp/',
+/

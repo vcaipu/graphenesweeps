@@ -18,6 +18,8 @@ fine_resolution = 41
 fine_radius = 0.04
 scf_resolution = 24
 outdir = "./tmp"
+iodir = "./io"
+projdir = "./projections"
 pseudopotential = "C.pbe-n-kjpaw_psl.1.0.0.UPF"
 # pseudopotential = "C.upf"
 # Helper functions
@@ -70,6 +72,7 @@ def create_from_template(template_path, output_input_name, replacements):
  
 
     # 3. Write the new executable input file
+    output_input_name = os.path.join(iodir, output_input_name)
     with open(output_input_name, 'w') as f:
         f.write(content)
 
@@ -94,11 +97,23 @@ def get_initial_relax_guess(guess):
     return (c1x,c1y,c1z),(c2x,c2y,c2z)
 
 def run_qe(inputfile,outputfile):
+    # Put both files in the io directory
+    inputfile = os.path.join(iodir, inputfile)
+    outputfile = os.path.join(iodir, outputfile)
+
     # cmd = f"apptainer exec --nv --bind /scratch:/scratch --bind $(pwd):$(pwd) ~/software/quantum_espresso/quantum_espresso_qe-7.3.1.sif mpirun -np 1 pw.x -input {inputfile} > {outputfile}"
 
     # the export OMP_NUM_THREADS=1 is to prevent the code from using more than one thread, is VERY IMPORTANT
     mca_flags = "--mca btl self,vader --mca pml ob1"
     cmd = f"export OMP_NUM_THREADS=1; mpirun {mca_flags} --bind-to none --oversubscribe -np 8 pw.x -nk 8 -input {inputfile} > {outputfile}"
+    subprocess.run(cmd, shell=True, check=True)
+
+def run_proj(inputfile,outputfile):
+    inputfile = os.path.join(iodir, inputfile)
+    outputfile = os.path.join(projdir, outputfile)
+
+    mca_flags = "--mca btl self,vader --mca pml ob1"
+    cmd = f"export OMP_NUM_THREADS=1; mpirun {mca_flags} --bind-to none --oversubscribe -np 8 projwfc.x -nk 8 < {inputfile} > {outputfile}"
     subprocess.run(cmd, shell=True, check=True)
 
 # def run_qe(inputfile, outputfile):
@@ -121,6 +136,7 @@ def parse_relaxed_atomic_positions(relax_output_path):
     Parse the final ATOMIC_POSITIONS (crystal) block from a QE relax output.
     Returns six floats: (c1x, c1y, c1z, c2x, c2y, c2z).
     """
+    relax_output_path = os.path.join(iodir, relax_output_path)
     with open(relax_output_path, 'r') as f:
         lines = f.readlines()
 
@@ -165,6 +181,7 @@ def parse_final_fermi_energy(relax_output_path):
     Parse the final Fermi energy (in eV) from a QE relax output.
     Returns one float (fermi_ev).
     """
+    relax_output_path = os.path.join(iodir, relax_output_path)
     with open(relax_output_path, 'r') as f:
         lines = f.readlines()
 
@@ -262,6 +279,16 @@ def generate_sniper_grid(center_kx, center_ky, spread, n_points):
     # Match print() behavior exactly: one trailing newline at end.
     return "\n".join(lines) + "\n"
 
+def append_kpoints(filename, append_string):
+    filename = os.path.join(iodir, filename)
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+    with open(filename, 'w') as f:
+        for line in lines[:-2]:
+            f.write(line)
+        f.write(append_string)
+    
+
 '''
 Code begins here
 '''
@@ -358,7 +385,7 @@ if checkpoint.get("relaxed_c1_vec") is None or checkpoint.get("relaxed_c2_vec") 
     inputfile1 = f"relax{strainString}.in"
     outputfile1 = f"relax{strainString}.out"
     create_from_template("templates/relax.in", inputfile1, relax_in_replacements)
-    print(f"Created {inputfile1} | Running RELAX | Check: tail -n 20 {outputfile1}")
+    print(f"Created {inputfile1} | Running RELAX | Check: tail -n 20 {iodir}/{outputfile1}")
 
     ## THE RUN
     run_qe(inputfile1,outputfile1)
@@ -413,7 +440,7 @@ if (
     inputfile2 = f"bands{strainString}.in"
     outputfile2 = f"bands{strainString}.out"
     create_from_template("templates/bands.in", inputfile2, band_in_replacements)
-    print(f"Created {inputfile2} | Running BANDS | Check: tail -n 20 {outputfile2}")
+    print(f"Created {inputfile2} | Running BANDS | Check: tail -n 20 {iodir}/{outputfile2}")
 
     ## THE RUN
     run_qe(inputfile2,outputfile2)
@@ -479,7 +506,7 @@ if (
     inputfile3 = f"scf{strainString}.in"
     outputfile3 = f"scf{strainString}.out"
     create_from_template("templates/scf.in", inputfile3, scf_in_replacements)
-    print(f"Created {inputfile3} | Running SCF | Check: tail -n 20 {outputfile3}")
+    print(f"Created {inputfile3} | Running SCF | Check: tail -n 20 {iodir}/{outputfile3}")
 
     ## THE RUN
     run_qe(inputfile3,outputfile3)
@@ -533,22 +560,30 @@ if (
     lower_replacements = upper_replacements.copy()
     lower_replacements["PREFIX"] = lowerprefix
 
+    upper_proj_replacements = {
+        "PREFIX": upperprefix,
+        "OUTDIR": outdir,
+    }
+    lower_proj_replacements = upper_proj_replacements.copy()
+    lower_proj_replacements["PREFIX"] = lowerprefix
+
     inputfile4upper = f"bands{strainString}upper.in"
     outputfile4upper = f"bands{strainString}upper.out"
+    inputfileprojupper = f"proj{strainString}upper.in"
+    outputfileprojupper = f"proj{strainString}upper.out"
     inputfile4lower = f"bands{strainString}lower.in"
     outputfile4lower = f"bands{strainString}lower.out"
-
+    inputfileprojlower = f"proj{strainString}lower.in"
+    outputfileprojlower = f"proj{strainString}lower.out"
     # Running UPPER
     create_from_template("templates/bands.in", inputfile4upper, upper_replacements)
     upper_append_string = generate_sniper_grid(upper_kx_dirac, upper_ky_dirac, fine_radius, fine_resolution)
-    with open(inputfile4upper, 'r') as f:
-        lines = f.readlines()
-    with open(inputfile4upper, 'w') as f:
-        for line in lines[:-2]:
-            f.write(line)
-        f.write(upper_append_string)
-    print(f"Created {inputfile4upper} | Running BANDS UPPER | Check: tail -n 20 {outputfile4upper}")
+    append_kpoints(inputfile4upper, upper_append_string)
+    create_from_template("templates/proj.in", inputfileprojupper, upper_proj_replacements)
+    
+    print(f"Created {inputfile4upper} | Running BANDS UPPER | Check: tail -n 20 {iodir}/{outputfile4upper}")
     run_qe(inputfile4upper,outputfile4upper)
+    run_proj(inputfileprojupper,outputfileprojupper)
     upper_min_gap, upper_kx_dirac, upper_ky_dirac = get_dirac_cone(upperprefix, e_fermi)
     print(f"Finished Running a BANDS UPPER")
     print(f"Upper-half minimum gap is: {upper_min_gap} eV")
@@ -557,14 +592,12 @@ if (
     # Running LOWER
     create_from_template("templates/bands.in", inputfile4lower, lower_replacements)
     lower_append_string = generate_sniper_grid(lower_kx_dirac, lower_ky_dirac, fine_radius, fine_resolution)
-    with open(inputfile4lower, 'r') as f:
-        lines = f.readlines()
-    with open(inputfile4lower, 'w') as f:
-        for line in lines[:-2]:
-            f.write(line)
-        f.write(lower_append_string)
-    print(f"Created {inputfile4lower} | Running BANDS LOWER | Check: tail -n 20 {outputfile4lower}")
+    append_kpoints(inputfile4lower, lower_append_string)
+    create_from_template("templates/proj.in", inputfileprojlower, lower_proj_replacements)
+
+    print(f"Created {inputfile4lower} | Running BANDS LOWER | Check: tail -n 20 {iodir}/{outputfile4lower}")
     run_qe(inputfile4lower,outputfile4lower)
+    run_proj(inputfileprojlower,outputfileprojlower)
     lower_min_gap, lower_kx_dirac, lower_ky_dirac = get_dirac_cone(lowerprefix, e_fermi)
     print(f"Finished Running a BANDS LOWER")
     print(f"Lower-half minimum gap is: {lower_min_gap} eV")
