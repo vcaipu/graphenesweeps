@@ -1,3 +1,4 @@
 *.dat
 *.wfc*
 *.hdf5
+.pydeps/

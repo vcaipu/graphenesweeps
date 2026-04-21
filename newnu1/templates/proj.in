@@ -1,0 +1,6 @@
+&PROJWFC
+  prefix  = 'graphene',
+  outdir  = './outdir/',
+  lsym    = .false.,
+  filproj = 'graphene.proj'
+/
