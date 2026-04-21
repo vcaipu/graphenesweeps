@@ -1,5 +1,6 @@
 import argparse
 import os
+import pickle
 import re
 
 import matplotlib.pyplot as plt
@@ -21,7 +22,20 @@ def parse_args():
             "(chosen from p_z projector weight)."
         )
     )
-    parser.add_argument("--proj-out", default="proj.out", help="Path to projwfc output file.")
+    parser.add_argument(
+        "--prefix",
+        default=None,
+        help=(
+            "Projection file prefix without extension, e.g. proj15.0lower. "
+            "If set, input path becomes <proj-dir>/<prefix>.out."
+        ),
+    )
+    parser.add_argument(
+        "--proj-dir",
+        default="projections",
+        help="Directory containing projection outputs when --prefix is used (default: projections).",
+    )
+    parser.add_argument("--proj-out", default=None, help="Direct path to projwfc output file.")
     parser.add_argument(
         "--pi-l",
         type=int,
@@ -78,6 +92,17 @@ def parse_args():
         type=str,
         default=None,
         help="Output figure path (default: <proj_stem>_pi_bands.png).",
+    )
+    parser.add_argument(
+        "--pickle-out",
+        type=str,
+        default=None,
+        help="Output pickle path (default: <proj_stem>_pi_data.pkl).",
+    )
+    parser.add_argument(
+        "--pickle-only",
+        action="store_true",
+        help="Write pickle data and skip plotting.",
     )
     return parser.parse_args()
 
@@ -296,15 +321,84 @@ def nearest_cut(records, fixed_value, along="x"):
     return chosen_fixed, cut_records
 
 
+def resolve_proj_out(args):
+    if args.proj_out:
+        return args.proj_out
+    if args.prefix:
+        return os.path.join(args.proj_dir, f"{args.prefix}.out")
+    raise ValueError("Provide either --proj-out or --prefix.")
+
+
+def annotate_non_pi_ranks(records):
+    by_k = _group_by_k(records)
+    out = []
+    for _, entries in by_k.items():
+        non_pi = sorted([rec for rec in entries if not rec.get("pi_selected")], key=lambda rec: rec["energy_ev"])
+        non_rank_by_id = {id(rec): i + 1 for i, rec in enumerate(non_pi)}
+        for rec in entries:
+            enriched = dict(rec)
+            enriched["non_pi_rank"] = non_rank_by_id.get(id(rec))
+            out.append(enriched)
+    return out
+
+
+def build_ranked_arrays(records):
+    by_k = _group_by_k(records)
+    k_order = list(by_k.keys())
+    nk = len(k_order)
+
+    max_pi_rank = 0
+    max_non_rank = 0
+    for key in k_order:
+        entries = by_k[key]
+        pi_ranks = [rec["pi_rank"] for rec in entries if rec.get("pi_selected") and rec.get("pi_rank") is not None]
+        non_ranks = [rec["non_pi_rank"] for rec in entries if rec.get("non_pi_rank") is not None]
+        if pi_ranks:
+            max_pi_rank = max(max_pi_rank, max(pi_ranks))
+        if non_ranks:
+            max_non_rank = max(max_non_rank, max(non_ranks))
+
+    pi_bands = np.full((max_pi_rank, nk), np.nan, dtype=float)
+    non_pi_bands = np.full((max_non_rank, nk), np.nan, dtype=float)
+    pi_band_indices = np.full((max_pi_rank, nk), -1, dtype=int)
+    non_pi_band_indices = np.full((max_non_rank, nk), -1, dtype=int)
+
+    for ik, key in enumerate(k_order):
+        for rec in by_k[key]:
+            if rec.get("pi_selected") and rec.get("pi_rank") is not None:
+                ir = rec["pi_rank"] - 1
+                pi_bands[ir, ik] = rec["energy_ev"]
+                pi_band_indices[ir, ik] = rec["band"]
+            elif rec.get("non_pi_rank") is not None:
+                ir = rec["non_pi_rank"] - 1
+                non_pi_bands[ir, ik] = rec["energy_ev"]
+                non_pi_band_indices[ir, ik] = rec["band"]
+
+    k_points = np.array(k_order, dtype=float)
+    return {
+        "k_points": k_points,
+        "pi_bands": pi_bands,
+        "non_pi_bands": non_pi_bands,
+        "pi_band_indices": pi_band_indices,
+        "non_pi_band_indices": non_pi_band_indices,
+    }
+
+
 def main():
     args = parse_args()
-    if not os.path.exists(args.proj_out):
-        print(f"Error: file not found: {args.proj_out}")
+    try:
+        proj_out = resolve_proj_out(args)
+    except ValueError as exc:
+        print(f"Error: {exc}")
+        return
+
+    if not os.path.exists(proj_out):
+        print(f"Error: file not found: {proj_out}")
         return
 
     try:
         records, pi_state_ids, _state_map = parse_projwfc_output(
-            args.proj_out,
+            proj_out,
             pi_l=args.pi_l,
             pi_m=args.pi_m,
         )
@@ -326,8 +420,34 @@ def main():
                 rec["pi_selected"] = rec["band"] in selected_bands
                 rec["pi_rank"] = rec["band"] if rec["pi_selected"] else None
             min_gap_info = infer_dirac_center_band_mean(records, selected_bands)
+        records_for_plot = annotate_non_pi_ranks(records_for_plot)
     except ValueError as exc:
         print(f"Error: {exc}")
+        return
+
+    proj_stem = os.path.splitext(os.path.basename(proj_out))[0]
+    pickle_path = args.pickle_out if args.pickle_out else f"./projections/{proj_stem}.pkl"
+    payload = build_ranked_arrays(records_for_plot)
+    payload["meta"] = {
+        "proj_out": proj_out,
+        "pi_projector_l": args.pi_l,
+        "pi_projector_m": args.pi_m,
+        "selection_mode": args.selection_mode,
+        "min_pi_weight": args.min_pi_weight,
+        "max_pi_bands": args.max_pi_bands,
+        "parsed_records": len(records),
+        "pi_states": sorted(pi_state_ids),
+    }
+    with open(pickle_path, "wb") as f:
+        pickle.dump(payload, f)
+    print(f"Saved pickle: {pickle_path}")
+    print(
+        f"Info: k_points={payload['k_points'].shape[0]}, "
+        f"pi_bands_shape={payload['pi_bands'].shape}, "
+        f"non_pi_bands_shape={payload['non_pi_bands'].shape}"
+    )
+
+    if args.pickle_only:
         return
 
     kx_target = min_gap_info["kx"] if args.kx is None else args.kx
@@ -415,10 +535,9 @@ def main():
     axes[0].legend(loc="best", fontsize=8)
     axes[1].legend(loc="best", fontsize=8)
 
-    proj_stem = os.path.splitext(os.path.basename(args.proj_out))[0]
     save_path = args.savefig if args.savefig else f"{proj_stem}_pi_bands.png"
     fig.suptitle(
-        f"pi bands from {os.path.basename(args.proj_out)} | "
+        f"pi bands from {os.path.basename(proj_out)} | "
         f"pi projector: l={args.pi_l}, m={args.pi_m}, "
         f"selection={args.selection_mode}, ranks={rank_ids}\n"
         f"inferred min-gap@({min_gap_info['kx']:.6f}, {min_gap_info['ky']:.6f}), "

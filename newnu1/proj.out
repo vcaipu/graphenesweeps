@@ -1,5 +1,5 @@
 
-     Program PROJWFC v.7.3.1 starts on 21Apr2026 at 19:47: 5 
+     Program PROJWFC v.7.3.1 starts on 21Apr2026 at 20:42: 5 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -10,13 +10,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
 
-     Parallel version (MPI & OpenMP), running on       8 processor cores
+     Parallel version (MPI & OpenMP), running on      16 processor cores
      Number of MPI processes:                 8
-     Threads/MPI process:                     1
+     Threads/MPI process:                     2
 
      MPI processes distributed on     1 nodes
      K-points division:     npool     =       8
-     25161 MiB available memory on the printing compute node when the environment starts
+     21297 MiB available memory on the printing compute node when the environment starts
 
 
      Reading xml data from directory:
@@ -52148,10 +52148,10 @@ Lowdin Charges:
      Atom #   2: total charge =   3.9641, p =  2.9842, pz=  0.9953, px=  0.9550, py=  1.0340, 
      Spilling Parameter:   0.0091
 
-     PROJWFC      :      1.76s CPU      2.24s WALL
+     PROJWFC      :      2.42s CPU      2.34s WALL
 
 
-   This run was terminated on:  19:47: 8  21Apr2026            
+   This run was terminated on:  20:42: 8  21Apr2026            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

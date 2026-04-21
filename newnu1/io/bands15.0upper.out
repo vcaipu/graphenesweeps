@@ -1,5 +1,5 @@
 
-     Program PWSCF v.7.3.1 starts on 21Apr2026 at 20:24:28 
+     Program PWSCF v.7.3.1 starts on 21Apr2026 at 20:31:20 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -15,7 +15,7 @@
      Threads/MPI process:                     1
 
      MPI processes distributed on     1 nodes
-     21370 MiB available memory on the printing compute node when the environment starts
+     21326 MiB available memory on the printing compute node when the environment starts
 
      Reading input from ./io/bands15.0upper.in
 
@@ -3569,7 +3569,7 @@
      total cpu time spent up to now is        3.2 secs
 
      Computing kpt #:    13  of   211 on this pool
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        3.3 secs
 
      Computing kpt #:    14  of   211 on this pool
      total cpu time spent up to now is        3.5 secs
@@ -3584,7 +3584,7 @@
      total cpu time spent up to now is        3.9 secs
 
      Computing kpt #:    18  of   211 on this pool
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      Computing kpt #:    19  of   211 on this pool
      total cpu time spent up to now is        4.2 secs
@@ -3593,13 +3593,13 @@
      total cpu time spent up to now is        4.3 secs
 
      Computing kpt #:    21  of   211 on this pool
-     total cpu time spent up to now is        4.5 secs
+     total cpu time spent up to now is        4.4 secs
 
      Computing kpt #:    22  of   211 on this pool
      total cpu time spent up to now is        4.6 secs
 
      Computing kpt #:    23  of   211 on this pool
-     total cpu time spent up to now is        4.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      Computing kpt #:    24  of   211 on this pool
      total cpu time spent up to now is        4.9 secs
@@ -3608,13 +3608,13 @@
      total cpu time spent up to now is        5.0 secs
 
      Computing kpt #:    26  of   211 on this pool
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        5.1 secs
 
      Computing kpt #:    27  of   211 on this pool
      total cpu time spent up to now is        5.3 secs
 
      Computing kpt #:    28  of   211 on this pool
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        5.5 secs
 
      Computing kpt #:    29  of   211 on this pool
      total cpu time spent up to now is        5.7 secs
@@ -3623,7 +3623,7 @@
      total cpu time spent up to now is        5.8 secs
 
      Computing kpt #:    31  of   211 on this pool
-     total cpu time spent up to now is        6.0 secs
+     total cpu time spent up to now is        5.9 secs
 
      Computing kpt #:    32  of   211 on this pool
      total cpu time spent up to now is        6.1 secs
@@ -3632,19 +3632,19 @@
      total cpu time spent up to now is        6.2 secs
 
      Computing kpt #:    34  of   211 on this pool
-     total cpu time spent up to now is        6.4 secs
+     total cpu time spent up to now is        6.3 secs
 
      Computing kpt #:    35  of   211 on this pool
-     total cpu time spent up to now is        6.5 secs
+     total cpu time spent up to now is        6.4 secs
 
      Computing kpt #:    36  of   211 on this pool
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        6.6 secs
 
      Computing kpt #:    37  of   211 on this pool
-     total cpu time spent up to now is        6.8 secs
+     total cpu time spent up to now is        6.7 secs
 
      Computing kpt #:    38  of   211 on this pool
-     total cpu time spent up to now is        6.9 secs
+     total cpu time spent up to now is        6.8 secs
 
      Computing kpt #:    39  of   211 on this pool
      total cpu time spent up to now is        7.0 secs
@@ -3653,7 +3653,7 @@
      total cpu time spent up to now is        7.1 secs
 
      Computing kpt #:    41  of   211 on this pool
-     total cpu time spent up to now is        7.3 secs
+     total cpu time spent up to now is        7.2 secs
 
      Computing kpt #:    42  of   211 on this pool
      total cpu time spent up to now is        7.4 secs
@@ -3662,16 +3662,16 @@
      total cpu time spent up to now is        7.5 secs
 
      Computing kpt #:    44  of   211 on this pool
-     total cpu time spent up to now is        7.7 secs
+     total cpu time spent up to now is        7.6 secs
 
      Computing kpt #:    45  of   211 on this pool
-     total cpu time spent up to now is        7.8 secs
+     total cpu time spent up to now is        7.7 secs
 
      Computing kpt #:    46  of   211 on this pool
-     total cpu time spent up to now is        8.0 secs
+     total cpu time spent up to now is        7.9 secs
 
      Computing kpt #:    47  of   211 on this pool
-     total cpu time spent up to now is        8.1 secs
+     total cpu time spent up to now is        8.0 secs
 
      Computing kpt #:    48  of   211 on this pool
      total cpu time spent up to now is        8.2 secs
@@ -3683,100 +3683,100 @@
      total cpu time spent up to now is        8.4 secs
 
      Computing kpt #:    51  of   211 on this pool
-     total cpu time spent up to now is        8.6 secs
+     total cpu time spent up to now is        8.5 secs
 
      Computing kpt #:    52  of   211 on this pool
-     total cpu time spent up to now is        8.8 secs
+     total cpu time spent up to now is        8.7 secs
 
      Computing kpt #:    53  of   211 on this pool
-     total cpu time spent up to now is        8.9 secs
+     total cpu time spent up to now is        8.8 secs
 
      Computing kpt #:    54  of   211 on this pool
      total cpu time spent up to now is        9.0 secs
 
      Computing kpt #:    55  of   211 on this pool
-     total cpu time spent up to now is        9.2 secs
+     total cpu time spent up to now is        9.1 secs
 
      Computing kpt #:    56  of   211 on this pool
-     total cpu time spent up to now is        9.4 secs
+     total cpu time spent up to now is        9.3 secs
 
      Computing kpt #:    57  of   211 on this pool
-     total cpu time spent up to now is        9.5 secs
+     total cpu time spent up to now is        9.4 secs
 
      Computing kpt #:    58  of   211 on this pool
-     total cpu time spent up to now is        9.6 secs
+     total cpu time spent up to now is        9.5 secs
 
      Computing kpt #:    59  of   211 on this pool
      total cpu time spent up to now is        9.7 secs
 
      Computing kpt #:    60  of   211 on this pool
-     total cpu time spent up to now is        9.9 secs
+     total cpu time spent up to now is        9.8 secs
 
      Computing kpt #:    61  of   211 on this pool
-     total cpu time spent up to now is       10.0 secs
+     total cpu time spent up to now is        9.9 secs
 
      Computing kpt #:    62  of   211 on this pool
-     total cpu time spent up to now is       10.2 secs
+     total cpu time spent up to now is       10.1 secs
 
      Computing kpt #:    63  of   211 on this pool
-     total cpu time spent up to now is       10.3 secs
+     total cpu time spent up to now is       10.2 secs
 
      Computing kpt #:    64  of   211 on this pool
-     total cpu time spent up to now is       10.5 secs
+     total cpu time spent up to now is       10.4 secs
 
      Computing kpt #:    65  of   211 on this pool
-     total cpu time spent up to now is       10.6 secs
+     total cpu time spent up to now is       10.5 secs
 
      Computing kpt #:    66  of   211 on this pool
-     total cpu time spent up to now is       10.7 secs
+     total cpu time spent up to now is       10.6 secs
 
      Computing kpt #:    67  of   211 on this pool
-     total cpu time spent up to now is       10.9 secs
+     total cpu time spent up to now is       10.8 secs
 
      Computing kpt #:    68  of   211 on this pool
-     total cpu time spent up to now is       11.0 secs
+     total cpu time spent up to now is       10.9 secs
 
      Computing kpt #:    69  of   211 on this pool
-     total cpu time spent up to now is       11.1 secs
+     total cpu time spent up to now is       11.0 secs
 
      Computing kpt #:    70  of   211 on this pool
      total cpu time spent up to now is       11.2 secs
 
      Computing kpt #:    71  of   211 on this pool
-     total cpu time spent up to now is       11.4 secs
+     total cpu time spent up to now is       11.3 secs
 
      Computing kpt #:    72  of   211 on this pool
      total cpu time spent up to now is       11.5 secs
 
      Computing kpt #:    73  of   211 on this pool
-     total cpu time spent up to now is       11.7 secs
+     total cpu time spent up to now is       11.6 secs
 
      Computing kpt #:    74  of   211 on this pool
-     total cpu time spent up to now is       11.8 secs
+     total cpu time spent up to now is       11.7 secs
 
      Computing kpt #:    75  of   211 on this pool
-     total cpu time spent up to now is       11.9 secs
+     total cpu time spent up to now is       11.8 secs
 
      Computing kpt #:    76  of   211 on this pool
      total cpu time spent up to now is       12.0 secs
 
      Computing kpt #:    77  of   211 on this pool
-     total cpu time spent up to now is       12.2 secs
+     total cpu time spent up to now is       12.1 secs
 
      Computing kpt #:    78  of   211 on this pool
-     total cpu time spent up to now is       12.4 secs
+     total cpu time spent up to now is       12.3 secs
 
      Computing kpt #:    79  of   211 on this pool
-     total cpu time spent up to now is       12.5 secs
+     total cpu time spent up to now is       12.4 secs
 
      Computing kpt #:    80  of   211 on this pool
-     total cpu time spent up to now is       12.6 secs
+     total cpu time spent up to now is       12.5 secs
 
      Computing kpt #:    81  of   211 on this pool
-     total cpu time spent up to now is       12.8 secs
+     total cpu time spent up to now is       12.7 secs
 
      Computing kpt #:    82  of   211 on this pool
-     total cpu time spent up to now is       12.9 secs
+     total cpu time spent up to now is       12.8 secs
 
      Computing kpt #:    83  of   211 on this pool
      total cpu time spent up to now is       13.0 secs
@@ -3785,389 +3785,389 @@
      total cpu time spent up to now is       13.1 secs
 
      Computing kpt #:    85  of   211 on this pool
-     total cpu time spent up to now is       13.3 secs
+     total cpu time spent up to now is       13.2 secs
 
      Computing kpt #:    86  of   211 on this pool
-     total cpu time spent up to now is       13.4 secs
+     total cpu time spent up to now is       13.3 secs
 
      Computing kpt #:    87  of   211 on this pool
      total cpu time spent up to now is       13.5 secs
 
      Computing kpt #:    88  of   211 on this pool
-     total cpu time spent up to now is       13.7 secs
+     total cpu time spent up to now is       13.6 secs
 
      Computing kpt #:    89  of   211 on this pool
-     total cpu time spent up to now is       13.8 secs
+     total cpu time spent up to now is       13.7 secs
 
      Computing kpt #:    90  of   211 on this pool
-     total cpu time spent up to now is       13.9 secs
+     total cpu time spent up to now is       13.8 secs
 
      Computing kpt #:    91  of   211 on this pool
      total cpu time spent up to now is       14.0 secs
 
      Computing kpt #:    92  of   211 on this pool
-     total cpu time spent up to now is       14.2 secs
+     total cpu time spent up to now is       14.1 secs
 
      Computing kpt #:    93  of   211 on this pool
-     total cpu time spent up to now is       14.3 secs
+     total cpu time spent up to now is       14.2 secs
 
      Computing kpt #:    94  of   211 on this pool
-     total cpu time spent up to now is       14.5 secs
+     total cpu time spent up to now is       14.4 secs
 
      Computing kpt #:    95  of   211 on this pool
-     total cpu time spent up to now is       14.6 secs
+     total cpu time spent up to now is       14.5 secs
 
      Computing kpt #:    96  of   211 on this pool
      total cpu time spent up to now is       14.7 secs
 
      Computing kpt #:    97  of   211 on this pool
-     total cpu time spent up to now is       14.9 secs
+     total cpu time spent up to now is       14.8 secs
 
      Computing kpt #:    98  of   211 on this pool
-     total cpu time spent up to now is       15.1 secs
+     total cpu time spent up to now is       15.0 secs
 
      Computing kpt #:    99  of   211 on this pool
-     total cpu time spent up to now is       15.2 secs
+     total cpu time spent up to now is       15.1 secs
 
      Computing kpt #:   100  of   211 on this pool
-     total cpu time spent up to now is       15.3 secs
+     total cpu time spent up to now is       15.2 secs
 
      Computing kpt #:   101  of   211 on this pool
-     total cpu time spent up to now is       15.4 secs
+     total cpu time spent up to now is       15.3 secs
 
      Computing kpt #:   102  of   211 on this pool
-     total cpu time spent up to now is       15.6 secs
+     total cpu time spent up to now is       15.5 secs
 
      Computing kpt #:   103  of   211 on this pool
-     total cpu time spent up to now is       15.8 secs
+     total cpu time spent up to now is       15.7 secs
 
      Computing kpt #:   104  of   211 on this pool
-     total cpu time spent up to now is       15.9 secs
+     total cpu time spent up to now is       15.8 secs
 
      Computing kpt #:   105  of   211 on this pool
-     total cpu time spent up to now is       16.1 secs
+     total cpu time spent up to now is       15.9 secs
 
      Computing kpt #:   106  of   211 on this pool
-     total cpu time spent up to now is       16.2 secs
+     total cpu time spent up to now is       16.0 secs
 
      Computing kpt #:   107  of   211 on this pool
-     total cpu time spent up to now is       16.3 secs
+     total cpu time spent up to now is       16.2 secs
 
      Computing kpt #:   108  of   211 on this pool
-     total cpu time spent up to now is       16.4 secs
+     total cpu time spent up to now is       16.3 secs
 
      Computing kpt #:   109  of   211 on this pool
-     total cpu time spent up to now is       16.6 secs
+     total cpu time spent up to now is       16.5 secs
 
      Computing kpt #:   110  of   211 on this pool
-     total cpu time spent up to now is       16.7 secs
+     total cpu time spent up to now is       16.6 secs
 
      Computing kpt #:   111  of   211 on this pool
-     total cpu time spent up to now is       16.8 secs
+     total cpu time spent up to now is       16.7 secs
 
      Computing kpt #:   112  of   211 on this pool
-     total cpu time spent up to now is       17.0 secs
+     total cpu time spent up to now is       16.9 secs
 
      Computing kpt #:   113  of   211 on this pool
-     total cpu time spent up to now is       17.1 secs
+     total cpu time spent up to now is       17.0 secs
 
      Computing kpt #:   114  of   211 on this pool
-     total cpu time spent up to now is       17.3 secs
+     total cpu time spent up to now is       17.2 secs
 
      Computing kpt #:   115  of   211 on this pool
-     total cpu time spent up to now is       17.4 secs
+     total cpu time spent up to now is       17.3 secs
 
      Computing kpt #:   116  of   211 on this pool
-     total cpu time spent up to now is       17.5 secs
+     total cpu time spent up to now is       17.4 secs
 
      Computing kpt #:   117  of   211 on this pool
-     total cpu time spent up to now is       17.6 secs
+     total cpu time spent up to now is       17.5 secs
 
      Computing kpt #:   118  of   211 on this pool
-     total cpu time spent up to now is       17.8 secs
+     total cpu time spent up to now is       17.7 secs
 
      Computing kpt #:   119  of   211 on this pool
-     total cpu time spent up to now is       17.9 secs
+     total cpu time spent up to now is       17.8 secs
 
      Computing kpt #:   120  of   211 on this pool
-     total cpu time spent up to now is       18.0 secs
+     total cpu time spent up to now is       17.9 secs
 
      Computing kpt #:   121  of   211 on this pool
-     total cpu time spent up to now is       18.1 secs
+     total cpu time spent up to now is       18.0 secs
 
      Computing kpt #:   122  of   211 on this pool
-     total cpu time spent up to now is       18.3 secs
+     total cpu time spent up to now is       18.2 secs
 
      Computing kpt #:   123  of   211 on this pool
-     total cpu time spent up to now is       18.4 secs
+     total cpu time spent up to now is       18.3 secs
 
      Computing kpt #:   124  of   211 on this pool
-     total cpu time spent up to now is       18.6 secs
+     total cpu time spent up to now is       18.5 secs
 
      Computing kpt #:   125  of   211 on this pool
-     total cpu time spent up to now is       18.7 secs
+     total cpu time spent up to now is       18.6 secs
 
      Computing kpt #:   126  of   211 on this pool
-     total cpu time spent up to now is       18.8 secs
+     total cpu time spent up to now is       18.7 secs
 
      Computing kpt #:   127  of   211 on this pool
-     total cpu time spent up to now is       19.0 secs
+     total cpu time spent up to now is       18.9 secs
 
      Computing kpt #:   128  of   211 on this pool
-     total cpu time spent up to now is       19.1 secs
+     total cpu time spent up to now is       19.0 secs
 
      Computing kpt #:   129  of   211 on this pool
-     total cpu time spent up to now is       19.3 secs
+     total cpu time spent up to now is       19.2 secs
 
      Computing kpt #:   130  of   211 on this pool
-     total cpu time spent up to now is       19.4 secs
+     total cpu time spent up to now is       19.3 secs
 
      Computing kpt #:   131  of   211 on this pool
-     total cpu time spent up to now is       19.5 secs
+     total cpu time spent up to now is       19.4 secs
 
      Computing kpt #:   132  of   211 on this pool
-     total cpu time spent up to now is       19.7 secs
+     total cpu time spent up to now is       19.6 secs
 
      Computing kpt #:   133  of   211 on this pool
-     total cpu time spent up to now is       19.8 secs
+     total cpu time spent up to now is       19.7 secs
 
      Computing kpt #:   134  of   211 on this pool
-     total cpu time spent up to now is       20.0 secs
+     total cpu time spent up to now is       19.9 secs
 
      Computing kpt #:   135  of   211 on this pool
-     total cpu time spent up to now is       20.1 secs
+     total cpu time spent up to now is       20.0 secs
 
      Computing kpt #:   136  of   211 on this pool
-     total cpu time spent up to now is       20.2 secs
+     total cpu time spent up to now is       20.1 secs
 
      Computing kpt #:   137  of   211 on this pool
-     total cpu time spent up to now is       20.3 secs
+     total cpu time spent up to now is       20.2 secs
 
      Computing kpt #:   138  of   211 on this pool
-     total cpu time spent up to now is       20.5 secs
+     total cpu time spent up to now is       20.4 secs
 
      Computing kpt #:   139  of   211 on this pool
-     total cpu time spent up to now is       20.7 secs
+     total cpu time spent up to now is       20.5 secs
 
      Computing kpt #:   140  of   211 on this pool
-     total cpu time spent up to now is       20.8 secs
+     total cpu time spent up to now is       20.7 secs
 
      Computing kpt #:   141  of   211 on this pool
-     total cpu time spent up to now is       20.9 secs
+     total cpu time spent up to now is       20.8 secs
 
      Computing kpt #:   142  of   211 on this pool
-     total cpu time spent up to now is       21.0 secs
+     total cpu time spent up to now is       20.9 secs
 
      Computing kpt #:   143  of   211 on this pool
-     total cpu time spent up to now is       21.2 secs
+     total cpu time spent up to now is       21.1 secs
 
      Computing kpt #:   144  of   211 on this pool
-     total cpu time spent up to now is       21.3 secs
+     total cpu time spent up to now is       21.2 secs
 
      Computing kpt #:   145  of   211 on this pool
-     total cpu time spent up to now is       21.5 secs
+     total cpu time spent up to now is       21.4 secs
 
      Computing kpt #:   146  of   211 on this pool
-     total cpu time spent up to now is       21.6 secs
+     total cpu time spent up to now is       21.5 secs
 
      Computing kpt #:   147  of   211 on this pool
-     total cpu time spent up to now is       21.7 secs
+     total cpu time spent up to now is       21.6 secs
 
      Computing kpt #:   148  of   211 on this pool
-     total cpu time spent up to now is       21.9 secs
+     total cpu time spent up to now is       21.7 secs
 
      Computing kpt #:   149  of   211 on this pool
-     total cpu time spent up to now is       22.0 secs
+     total cpu time spent up to now is       21.9 secs
 
      Computing kpt #:   150  of   211 on this pool
-     total cpu time spent up to now is       22.1 secs
+     total cpu time spent up to now is       22.0 secs
 
      Computing kpt #:   151  of   211 on this pool
-     total cpu time spent up to now is       22.3 secs
+     total cpu time spent up to now is       22.2 secs
 
      Computing kpt #:   152  of   211 on this pool
-     total cpu time spent up to now is       22.4 secs
+     total cpu time spent up to now is       22.3 secs
 
      Computing kpt #:   153  of   211 on this pool
-     total cpu time spent up to now is       22.5 secs
+     total cpu time spent up to now is       22.4 secs
 
      Computing kpt #:   154  of   211 on this pool
-     total cpu time spent up to now is       22.7 secs
+     total cpu time spent up to now is       22.6 secs
 
      Computing kpt #:   155  of   211 on this pool
-     total cpu time spent up to now is       22.8 secs
+     total cpu time spent up to now is       22.7 secs
 
      Computing kpt #:   156  of   211 on this pool
-     total cpu time spent up to now is       23.0 secs
+     total cpu time spent up to now is       22.9 secs
 
      Computing kpt #:   157  of   211 on this pool
-     total cpu time spent up to now is       23.1 secs
+     total cpu time spent up to now is       23.0 secs
 
      Computing kpt #:   158  of   211 on this pool
-     total cpu time spent up to now is       23.2 secs
+     total cpu time spent up to now is       23.1 secs
 
      Computing kpt #:   159  of   211 on this pool
-     total cpu time spent up to now is       23.4 secs
+     total cpu time spent up to now is       23.3 secs
 
      Computing kpt #:   160  of   211 on this pool
-     total cpu time spent up to now is       23.5 secs
+     total cpu time spent up to now is       23.4 secs
 
      Computing kpt #:   161  of   211 on this pool
-     total cpu time spent up to now is       23.6 secs
+     total cpu time spent up to now is       23.5 secs
 
      Computing kpt #:   162  of   211 on this pool
-     total cpu time spent up to now is       23.7 secs
+     total cpu time spent up to now is       23.6 secs
 
      Computing kpt #:   163  of   211 on this pool
-     total cpu time spent up to now is       23.9 secs
+     total cpu time spent up to now is       23.8 secs
 
      Computing kpt #:   164  of   211 on this pool
-     total cpu time spent up to now is       24.0 secs
+     total cpu time spent up to now is       23.9 secs
 
      Computing kpt #:   165  of   211 on this pool
-     total cpu time spent up to now is       24.2 secs
+     total cpu time spent up to now is       24.1 secs
 
      Computing kpt #:   166  of   211 on this pool
-     total cpu time spent up to now is       24.3 secs
+     total cpu time spent up to now is       24.2 secs
 
      Computing kpt #:   167  of   211 on this pool
-     total cpu time spent up to now is       24.4 secs
+     total cpu time spent up to now is       24.3 secs
 
      Computing kpt #:   168  of   211 on this pool
-     total cpu time spent up to now is       24.5 secs
+     total cpu time spent up to now is       24.4 secs
 
      Computing kpt #:   169  of   211 on this pool
-     total cpu time spent up to now is       24.7 secs
+     total cpu time spent up to now is       24.6 secs
 
      Computing kpt #:   170  of   211 on this pool
-     total cpu time spent up to now is       24.8 secs
+     total cpu time spent up to now is       24.7 secs
 
      Computing kpt #:   171  of   211 on this pool
-     total cpu time spent up to now is       24.9 secs
+     total cpu time spent up to now is       24.8 secs
 
      Computing kpt #:   172  of   211 on this pool
      total cpu time spent up to now is       25.0 secs
 
      Computing kpt #:   173  of   211 on this pool
-     total cpu time spent up to now is       25.2 secs
+     total cpu time spent up to now is       25.1 secs
 
      Computing kpt #:   174  of   211 on this pool
-     total cpu time spent up to now is       25.3 secs
+     total cpu time spent up to now is       25.2 secs
 
      Computing kpt #:   175  of   211 on this pool
-     total cpu time spent up to now is       25.5 secs
+     total cpu time spent up to now is       25.4 secs
 
      Computing kpt #:   176  of   211 on this pool
-     total cpu time spent up to now is       25.6 secs
+     total cpu time spent up to now is       25.5 secs
 
      Computing kpt #:   177  of   211 on this pool
-     total cpu time spent up to now is       25.7 secs
+     total cpu time spent up to now is       25.6 secs
 
      Computing kpt #:   178  of   211 on this pool
-     total cpu time spent up to now is       26.0 secs
+     total cpu time spent up to now is       25.7 secs
 
      Computing kpt #:   179  of   211 on this pool
-     total cpu time spent up to now is       26.8 secs
+     total cpu time spent up to now is       25.9 secs
 
      Computing kpt #:   180  of   211 on this pool
-     total cpu time spent up to now is       26.9 secs
+     total cpu time spent up to now is       26.0 secs
 
      Computing kpt #:   181  of   211 on this pool
-     total cpu time spent up to now is       27.1 secs
+     total cpu time spent up to now is       26.1 secs
 
      Computing kpt #:   182  of   211 on this pool
-     total cpu time spent up to now is       27.2 secs
+     total cpu time spent up to now is       26.2 secs
 
      Computing kpt #:   183  of   211 on this pool
-     total cpu time spent up to now is       27.3 secs
+     total cpu time spent up to now is       26.4 secs
 
      Computing kpt #:   184  of   211 on this pool
-     total cpu time spent up to now is       27.4 secs
+     total cpu time spent up to now is       26.5 secs
 
      Computing kpt #:   185  of   211 on this pool
-     total cpu time spent up to now is       27.6 secs
+     total cpu time spent up to now is       26.7 secs
 
      Computing kpt #:   186  of   211 on this pool
-     total cpu time spent up to now is       27.8 secs
+     total cpu time spent up to now is       26.8 secs
 
      Computing kpt #:   187  of   211 on this pool
-     total cpu time spent up to now is       27.9 secs
+     total cpu time spent up to now is       27.0 secs
 
      Computing kpt #:   188  of   211 on this pool
-     total cpu time spent up to now is       28.0 secs
+     total cpu time spent up to now is       27.1 secs
 
      Computing kpt #:   189  of   211 on this pool
-     total cpu time spent up to now is       28.1 secs
+     total cpu time spent up to now is       27.2 secs
 
      Computing kpt #:   190  of   211 on this pool
-     total cpu time spent up to now is       28.3 secs
+     total cpu time spent up to now is       27.4 secs
 
      Computing kpt #:   191  of   211 on this pool
-     total cpu time spent up to now is       28.4 secs
+     total cpu time spent up to now is       27.5 secs
 
      Computing kpt #:   192  of   211 on this pool
-     total cpu time spent up to now is       28.6 secs
+     total cpu time spent up to now is       27.7 secs
 
      Computing kpt #:   193  of   211 on this pool
-     total cpu time spent up to now is       28.7 secs
+     total cpu time spent up to now is       27.8 secs
 
      Computing kpt #:   194  of   211 on this pool
-     total cpu time spent up to now is       28.8 secs
+     total cpu time spent up to now is       27.9 secs
 
      Computing kpt #:   195  of   211 on this pool
-     total cpu time spent up to now is       29.0 secs
+     total cpu time spent up to now is       28.1 secs
 
      Computing kpt #:   196  of   211 on this pool
-     total cpu time spent up to now is       29.1 secs
+     total cpu time spent up to now is       28.2 secs
 
      Computing kpt #:   197  of   211 on this pool
-     total cpu time spent up to now is       29.2 secs
+     total cpu time spent up to now is       28.3 secs
 
      Computing kpt #:   198  of   211 on this pool
-     total cpu time spent up to now is       29.4 secs
+     total cpu time spent up to now is       28.4 secs
 
      Computing kpt #:   199  of   211 on this pool
-     total cpu time spent up to now is       29.5 secs
+     total cpu time spent up to now is       28.6 secs
 
      Computing kpt #:   200  of   211 on this pool
-     total cpu time spent up to now is       29.7 secs
+     total cpu time spent up to now is       28.7 secs
 
      Computing kpt #:   201  of   211 on this pool
-     total cpu time spent up to now is       29.8 secs
+     total cpu time spent up to now is       28.9 secs
 
      Computing kpt #:   202  of   211 on this pool
-     total cpu time spent up to now is       29.9 secs
+     total cpu time spent up to now is       29.0 secs
 
      Computing kpt #:   203  of   211 on this pool
-     total cpu time spent up to now is       30.0 secs
+     total cpu time spent up to now is       29.1 secs
 
      Computing kpt #:   204  of   211 on this pool
-     total cpu time spent up to now is       30.2 secs
+     total cpu time spent up to now is       29.3 secs
 
      Computing kpt #:   205  of   211 on this pool
-     total cpu time spent up to now is       30.3 secs
+     total cpu time spent up to now is       29.4 secs
 
      Computing kpt #:   206  of   211 on this pool
-     total cpu time spent up to now is       30.4 secs
+     total cpu time spent up to now is       29.5 secs
 
      Computing kpt #:   207  of   211 on this pool
-     total cpu time spent up to now is       30.6 secs
+     total cpu time spent up to now is       29.7 secs
 
      Computing kpt #:   208  of   211 on this pool
-     total cpu time spent up to now is       30.7 secs
+     total cpu time spent up to now is       29.8 secs
 
      Computing kpt #:   209  of   211 on this pool
-     total cpu time spent up to now is       30.8 secs
+     total cpu time spent up to now is       29.9 secs
 
      Computing kpt #:   210  of   211 on this pool
-     total cpu time spent up to now is       31.0 secs
+     total cpu time spent up to now is       30.1 secs
 
      Computing kpt #:   211  of   211 on this pool
-     total cpu time spent up to now is       31.1 secs
+     total cpu time spent up to now is       30.2 secs
 
      ethr =  1.25E-08,  avg # of iterations = 32.9
 
-     total cpu time spent up to now is       31.1 secs
+     total cpu time spent up to now is       30.2 secs
 
      End of band structure calculation
 
@@ -10899,58 +10899,58 @@
      XML data file, pseudopotentials, collected wavefunctions
 
      init_run     :      0.81s CPU      0.82s WALL (       1 calls)
-     electrons    :     29.59s CPU     29.80s WALL (       1 calls)
+     electrons    :     28.65s CPU     28.89s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      wfcinit:atom :      0.04s CPU      0.04s WALL (     211 calls)
-     wfcinit:wfcr :      1.44s CPU      1.44s WALL (     211 calls)
+     wfcinit:wfcr :      1.42s CPU      1.43s WALL (     211 calls)
      potinit      :      0.02s CPU      0.03s WALL (       1 calls)
-     hinit0       :      0.72s CPU      0.73s WALL (       1 calls)
+     hinit0       :      0.73s CPU      0.73s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     29.58s CPU     29.78s WALL (       1 calls)
-     v_of_rho     :      0.02s CPU      0.02s WALL (       1 calls)
+     c_bands      :     28.64s CPU     28.88s WALL (       1 calls)
+     v_of_rho     :      0.01s CPU      0.02s WALL (       1 calls)
      v_h          :      0.00s CPU      0.00s WALL (       1 calls)
      v_xc         :      0.01s CPU      0.01s WALL (       1 calls)
      newd         :      0.00s CPU      0.00s WALL (       1 calls)
      PAW_pot      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
-     init_us_2    :      0.06s CPU      0.06s WALL (     211 calls)
-     cegterg      :     20.53s CPU     20.65s WALL (     482 calls)
+     init_us_2    :      0.05s CPU      0.05s WALL (     211 calls)
+     cegterg      :     20.03s CPU     20.16s WALL (     482 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     cdiaghg      :      0.51s CPU      0.51s WALL (    7565 calls)
+     cdiaghg      :      0.51s CPU      0.52s WALL (    7565 calls)
      cegterg:over :      0.87s CPU      0.88s WALL (    7354 calls)
      cegterg:upda :      0.81s CPU      0.82s WALL (    7354 calls)
-     cegterg:last :      1.22s CPU      1.23s WALL (    3240 calls)
-     h_psi        :     17.37s CPU     17.46s WALL (    8047 calls)
-     s_psi        :      0.57s CPU      0.57s WALL (    8047 calls)
+     cegterg:last :      1.23s CPU      1.23s WALL (    3240 calls)
+     h_psi        :     16.86s CPU     16.95s WALL (    8047 calls)
+     s_psi        :      0.56s CPU      0.57s WALL (    8047 calls)
      g_psi        :      0.25s CPU      0.26s WALL (    7354 calls)
 
      Called by h_psi:
-     h_psi:calbec :      0.68s CPU      0.68s WALL (    8047 calls)
-     vloc_psi     :     15.87s CPU     15.94s WALL (    8047 calls)
-     add_vuspsi   :      0.73s CPU      0.74s WALL (    8047 calls)
+     h_psi:calbec :      0.67s CPU      0.68s WALL (    8047 calls)
+     vloc_psi     :     15.35s CPU     15.44s WALL (    8047 calls)
+     add_vuspsi   :      0.74s CPU      0.74s WALL (    8047 calls)
 
      General routines
-     calbec       :      0.67s CPU      0.67s WALL (    8047 calls)
+     calbec       :      0.66s CPU      0.67s WALL (    8047 calls)
      fft          :      0.65s CPU      0.65s WALL (      12 calls)
-     fftw         :     13.32s CPU     13.39s WALL (   58410 calls)
-     davcio       :      0.02s CPU      0.10s WALL (     422 calls)
+     fftw         :     12.81s CPU     12.88s WALL (   58410 calls)
+     davcio       :      0.02s CPU      0.11s WALL (     422 calls)
 
      Parallel routines
 
      PAW routines
      PAW_pot      :      0.01s CPU      0.01s WALL (       1 calls)
 
-     PWSCF        :     31.00s CPU     36.78s WALL
+     PWSCF        :     30.05s CPU     37.73s WALL
 
 
-   This run was terminated on:  20:25: 4  21Apr2026            
+   This run was terminated on:  20:31:57  21Apr2026            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

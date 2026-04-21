@@ -112,8 +112,12 @@ def run_proj(inputfile,outputfile):
     inputfile = os.path.join(iodir, inputfile)
     outputfile = os.path.join(projdir, outputfile)
 
-    mca_flags = "--mca btl self,vader --mca pml ob1"
-    cmd = f"export OMP_NUM_THREADS=1; mpirun {mca_flags} --bind-to none --oversubscribe -np 8 projwfc.x -nk 8 < {inputfile} > {outputfile}"
+    cmd = f"export OMP_NUM_THREADS=1; mpirun --bind-to none --oversubscribe -np 8 projwfc.x -nk 8 < {inputfile} > {outputfile} 2>&1"
+    subprocess.run(cmd, shell=True, check=True)
+
+    # Then pickle results
+    proj_file_prefix = os.path.splitext(os.path.basename(outputfile))[0]
+    cmd = f"python visualize/parseproj.py --proj-out {proj_file_prefix} --pickle-only"
     subprocess.run(cmd, shell=True, check=True)
 
 # def run_qe(inputfile, outputfile):
@@ -583,11 +587,15 @@ if (
     
     print(f"Created {inputfile4upper} | Running BANDS UPPER | Check: tail -n 20 {iodir}/{outputfile4upper}")
     run_qe(inputfile4upper,outputfile4upper)
-    run_proj(inputfileprojupper,outputfileprojupper)
     upper_min_gap, upper_kx_dirac, upper_ky_dirac = get_dirac_cone(upperprefix, e_fermi)
     print(f"Finished Running a BANDS UPPER")
     print(f"Upper-half minimum gap is: {upper_min_gap} eV")
-    print(f"Upper-half Dirac point is at: ({upper_kx_dirac}, {upper_ky_dirac})")
+    print(f"Upper-half Dirac point is at: ({upper_kx_dirac}, {upper_ky_dirac})\n")
+
+    print("Running Projections for Upper")
+    run_proj(inputfileprojupper,outputfileprojupper)
+    print("Finished the Projection for Upper\n")
+
 
     # Running LOWER
     create_from_template("templates/bands.in", inputfile4lower, lower_replacements)
@@ -597,11 +605,14 @@ if (
 
     print(f"Created {inputfile4lower} | Running BANDS LOWER | Check: tail -n 20 {iodir}/{outputfile4lower}")
     run_qe(inputfile4lower,outputfile4lower)
-    run_proj(inputfileprojlower,outputfileprojlower)
     lower_min_gap, lower_kx_dirac, lower_ky_dirac = get_dirac_cone(lowerprefix, e_fermi)
     print(f"Finished Running a BANDS LOWER")
     print(f"Lower-half minimum gap is: {lower_min_gap} eV")
-    print(f"Lower-half Dirac point is at: ({lower_kx_dirac}, {lower_ky_dirac})")
+    print(f"Lower-half Dirac point is at: ({lower_kx_dirac}, {lower_ky_dirac})\n")
+
+    print("Running Projections for Lower")
+    run_proj(inputfileprojlower,outputfileprojlower)
+    print("Finished the Projection for Lower\n")
 
     end_time = time.time()
     print(f"Time taken: {end_time - start_time} seconds")
