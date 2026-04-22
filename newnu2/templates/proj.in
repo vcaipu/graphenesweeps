@@ -1,0 +1,4 @@
+&PROJWFC
+  prefix='PREFIX',
+  outdir='OUTDIR',
+/
