@@ -9,7 +9,8 @@ import numpy as np
 def parse_args():
     parser = argparse.ArgumentParser(
         description=(
-            "Load pi-band pickle data and compare linear vs quadratic fits "
+            "Load pi-band pickle data and compare piecewise-linear (Dirac-like) "
+            "vs quadratic fits "
             "for each pi band on a 1D k-space cut."
         )
     )
@@ -23,7 +24,7 @@ def parse_args():
         default=None,
         help=(
             "Projection prefix, e.g. proj15.0upper. If --pickle is not set, "
-            "script looks for <proj-dir>/<prefix>_pi_data.pkl."
+            "script looks for <proj-dir>/<prefix>.pkl."
         ),
     )
     parser.add_argument(
@@ -33,9 +34,9 @@ def parse_args():
     )
     parser.add_argument(
         "--axis",
-        choices=["kx", "ky"],
-        default="kx",
-        help="Sweep axis for fitting (default: kx).",
+        choices=["kx", "ky", "both"],
+        default="both",
+        help="Sweep axis for fitting (default: both).",
     )
     parser.add_argument(
         "--fixed",
@@ -43,8 +44,21 @@ def parse_args():
         default=None,
         help=(
             "Fixed value for the other axis. "
-            "If omitted, inferred from minimum pi-gap location."
+            "If omitted, inferred from minimum pi-gap location. "
+            "Used only for single-axis mode."
         ),
+    )
+    parser.add_argument(
+        "--fixed-kx",
+        type=float,
+        default=None,
+        help="Fixed kx value for ky-axis fit (used when --axis both or ky).",
+    )
+    parser.add_argument(
+        "--fixed-ky",
+        type=float,
+        default=None,
+        help="Fixed ky value for kx-axis fit (used when --axis both or kx).",
     )
     parser.add_argument(
         "--fermi",
@@ -91,8 +105,8 @@ def resolve_pickle_path(args):
         raise ValueError("Provide either --pickle or --prefix.")
 
     candidates = [
-        os.path.join(args.proj_dir, f"{args.prefix}_pi_data.pkl"),
-        f"{args.prefix}_pi_data.pkl",
+        os.path.join(args.proj_dir, f"{args.prefix}.pkl"),
+        f"{args.prefix}.pkl",
     ]
     for cand in candidates:
         if os.path.exists(cand):
@@ -135,36 +149,129 @@ def build_cut_indices(k_points, axis, fixed_target):
     return idx, x, fixed_value
 
 
+def _fit_metrics(y_true, y_pred):
+    resid = y_true - y_pred
+    ss_res = float(np.sum(resid * resid))
+    y_mean = float(np.mean(y_true))
+    ss_tot = float(np.sum((y_true - y_mean) ** 2))
+    rmse = float(np.sqrt(np.mean(resid * resid)))
+    r2 = float(1.0 - ss_res / ss_tot) if ss_tot > 0 else np.nan
+    return rmse, r2
+
+
+def _eval_piecewise_abs(x, a, x0, b):
+    return a * np.abs(x - x0) + b
+
+
+def _fit_piecewise_abs(x, y):
+    # Fit E(k)=a*|k-k0|+b by scanning k0 and solving (a,b) via least squares.
+    x_sorted = np.sort(np.unique(x))
+    if x_sorted.size == 1:
+        # Degenerate case: only one x value.
+        x0 = float(x_sorted[0])
+        a = 0.0
+        b = float(np.mean(y))
+        y_pred = _eval_piecewise_abs(x, a, x0, b)
+        return a, x0, b, y_pred
+
+    mids = 0.5 * (x_sorted[:-1] + x_sorted[1:])
+    candidates = np.unique(np.concatenate([x_sorted, mids]))
+
+    best = None
+    for x0 in candidates:
+        A = np.column_stack([np.abs(x - x0), np.ones_like(x)])
+        coeff, *_ = np.linalg.lstsq(A, y, rcond=None)
+        a, b = float(coeff[0]), float(coeff[1])
+        y_pred = _eval_piecewise_abs(x, a, float(x0), b)
+        rmse, _ = _fit_metrics(y, y_pred)
+        if best is None or rmse < best["rmse"]:
+            best = {"a": a, "x0": float(x0), "b": b, "y_pred": y_pred, "rmse": rmse}
+
+    return best["a"], best["x0"], best["b"], best["y_pred"]
+
+
 def fit_band(x, y):
-    coeff_lin = np.polyfit(x, y, deg=1)
+    a_pw, x0_pw, b_pw, y_pw = _fit_piecewise_abs(x, y)
     coeff_quad = np.polyfit(x, y, deg=2)
-    y_lin = np.polyval(coeff_lin, x)
     y_quad = np.polyval(coeff_quad, x)
 
-    def metrics(y_true, y_pred):
-        resid = y_true - y_pred
-        ss_res = float(np.sum(resid * resid))
-        y_mean = float(np.mean(y_true))
-        ss_tot = float(np.sum((y_true - y_mean) ** 2))
-        rmse = float(np.sqrt(np.mean(resid * resid)))
-        r2 = float(1.0 - ss_res / ss_tot) if ss_tot > 0 else np.nan
-        return rmse, r2
-
-    lin_rmse, lin_r2 = metrics(y, y_lin)
-    quad_rmse, quad_r2 = metrics(y, y_quad)
-    better = "quadratic" if quad_rmse < lin_rmse else "linear"
+    pw_rmse, pw_r2 = _fit_metrics(y, y_pw)
+    quad_rmse, quad_r2 = _fit_metrics(y, y_quad)
+    better = "quadratic" if quad_rmse < pw_rmse else "piecewise-linear"
 
     return {
-        "coeff_lin": coeff_lin,
+        "piecewise_params": {"a": a_pw, "x0": x0_pw, "b": b_pw},
         "coeff_quad": coeff_quad,
-        "y_lin": y_lin,
+        "y_piecewise": y_pw,
         "y_quad": y_quad,
-        "lin_rmse": lin_rmse,
-        "lin_r2": lin_r2,
+        "piecewise_rmse": pw_rmse,
+        "piecewise_r2": pw_r2,
         "quad_rmse": quad_rmse,
         "quad_r2": quad_r2,
         "better": better,
     }
+
+
+def run_axis_fit(k_points, pi_bands, axis, fixed_target, min_points, fermi, ax):
+    cut_idx, x, fixed_value = build_cut_indices(k_points, axis, fixed_target)
+    if x.size < min_points:
+        raise ValueError(f"{axis} cut has only {x.size} points; need at least {min_points}.")
+
+    colors = ["tab:blue", "tab:red", "tab:green", "tab:purple", "tab:orange", "tab:brown"]
+    x_dense = np.linspace(float(np.min(x)), float(np.max(x)), 400)
+    fit_summaries = []
+
+    for band_i in range(pi_bands.shape[0]):
+        y = pi_bands[band_i, cut_idx]
+        valid = np.isfinite(y)
+        if np.count_nonzero(valid) < min_points:
+            continue
+
+        xv = x[valid]
+        yv = y[valid]
+        if fermi is not None:
+            yv = yv - fermi
+
+        fit = fit_band(xv, yv)
+        fit_summaries.append((band_i + 1, fit))
+
+        color = colors[band_i % len(colors)]
+        ax.scatter(xv, yv, s=16, color=color, alpha=0.8, label=f"pi rank {band_i + 1} data")
+        pw = fit["piecewise_params"]
+        ax.plot(
+            x_dense,
+            _eval_piecewise_abs(x_dense, pw["a"], pw["x0"], pw["b"]),
+            color=color,
+            lw=1.5,
+            ls="--",
+            alpha=0.9,
+            label=f"pi rank {band_i + 1} piecewise-linear",
+        )
+        ax.plot(
+            x_dense,
+            np.polyval(fit["coeff_quad"], x_dense),
+            color=color,
+            lw=1.8,
+            ls="-",
+            alpha=0.9,
+            label=f"pi rank {band_i + 1} quadratic",
+        )
+
+    if not fit_summaries:
+        raise ValueError(f"no pi bands on {axis} cut with enough finite points to fit.")
+
+    xlabel = r"$k_x$ (tpiba)" if axis == "kx" else r"$k_y$ (tpiba)"
+    fixed_label = "ky" if axis == "kx" else "kx"
+    ylabel = r"$E - E_F$ (eV)" if fermi is not None else r"$E$ (eV)"
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(f"Pi-band fits along {axis} cut at {fixed_label}={fixed_value:.6f}")
+    ax.grid(alpha=0.25)
+    if fermi is not None:
+        ax.axhline(0.0, color="gray", lw=1.0, ls=":")
+    ax.legend(fontsize=8, ncol=2)
+
+    return fit_summaries, fixed_label, fixed_value, x.size
 
 
 def main():
@@ -181,66 +288,41 @@ def main():
         print(f"Error: {exc}")
         return
 
-    fixed_target = args.fixed if args.fixed is not None else infer_cut_value(k_points, pi_bands, args.axis)
-    cut_idx, x, fixed_value = build_cut_indices(k_points, args.axis, fixed_target)
-    if x.size < args.min_points:
-        print(f"Error: cut has only {x.size} points; need at least {args.min_points}.")
-        return
+    axes_to_run = ["kx", "ky"] if args.axis == "both" else [args.axis]
+    if len(axes_to_run) == 2:
+        fig, axes = plt.subplots(1, 2, figsize=(16, 6), constrained_layout=True)
+    else:
+        fig, axes = plt.subplots(figsize=(10, 6))
+        axes = [axes]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    colors = ["tab:blue", "tab:red", "tab:green", "tab:purple", "tab:orange", "tab:brown"]
-    x_dense = np.linspace(float(np.min(x)), float(np.max(x)), 400)
+    all_summaries = {}
+    for axis, ax in zip(axes_to_run, axes):
+        if axis == "kx":
+            fixed_target = (
+                args.fixed_ky
+                if args.fixed_ky is not None
+                else (args.fixed if args.axis != "both" and args.fixed is not None else infer_cut_value(k_points, pi_bands, axis))
+            )
+        else:
+            fixed_target = (
+                args.fixed_kx
+                if args.fixed_kx is not None
+                else (args.fixed if args.axis != "both" and args.fixed is not None else infer_cut_value(k_points, pi_bands, axis))
+            )
 
-    fit_summaries = []
-    for band_i in range(pi_bands.shape[0]):
-        y = pi_bands[band_i, cut_idx]
-        valid = np.isfinite(y)
-        if np.count_nonzero(valid) < args.min_points:
-            continue
-
-        xv = x[valid]
-        yv = y[valid]
-        if args.fermi is not None:
-            yv = yv - args.fermi
-
-        fit = fit_band(xv, yv)
-        fit_summaries.append((band_i + 1, fit))
-
-        color = colors[band_i % len(colors)]
-        ax.scatter(xv, yv, s=16, color=color, alpha=0.8, label=f"pi rank {band_i + 1} data")
-        ax.plot(
-            x_dense,
-            np.polyval(fit["coeff_lin"], x_dense),
-            color=color,
-            lw=1.5,
-            ls="--",
-            alpha=0.9,
-            label=f"pi rank {band_i + 1} linear",
-        )
-        ax.plot(
-            x_dense,
-            np.polyval(fit["coeff_quad"], x_dense),
-            color=color,
-            lw=1.8,
-            ls="-",
-            alpha=0.9,
-            label=f"pi rank {band_i + 1} quadratic",
-        )
-
-    if not fit_summaries:
-        print("Error: no pi bands on selected cut with enough finite points to fit.")
-        return
-
-    xlabel = r"$k_x$ (tpiba)" if args.axis == "kx" else r"$k_y$ (tpiba)"
-    fixed_label = "ky" if args.axis == "kx" else "kx"
-    ylabel = r"$E - E_F$ (eV)" if args.fermi is not None else r"$E$ (eV)"
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-    ax.set_title(f"Pi-band fits along {args.axis} cut at {fixed_label}={fixed_value:.6f}")
-    ax.grid(alpha=0.25)
-    if args.fermi is not None:
-        ax.axhline(0.0, color="gray", lw=1.0, ls=":")
-    ax.legend(fontsize=8, ncol=2)
+        try:
+            fit_summaries, fixed_label, fixed_value, n_points = run_axis_fit(
+                k_points, pi_bands, axis, fixed_target, args.min_points, args.fermi, ax
+            )
+        except ValueError as exc:
+            print(f"Error: {exc}")
+            return
+        all_summaries[axis] = {
+            "fit_summaries": fit_summaries,
+            "fixed_label": fixed_label,
+            "fixed_value": fixed_value,
+            "n_points": n_points,
+        }
 
     pstem = os.path.splitext(os.path.basename(pickle_path))[0]
     savefig = args.savefig if args.savefig else f"{pstem}_pi_fit_{args.axis}.png"
@@ -248,14 +330,19 @@ def main():
     plt.savefig(savefig, dpi=300, bbox_inches="tight")
 
     print(f"Saved fit plot: {savefig}")
-    print(f"Info: axis={args.axis}, fixed_{fixed_label}={fixed_value:.8f}, n_points={x.size}")
-    for rank, fit in fit_summaries:
+    for axis in axes_to_run:
+        summary = all_summaries[axis]
         print(
-            f"pi rank {rank}: "
-            f"linear RMSE={fit['lin_rmse']:.6e}, R2={fit['lin_r2']:.6f}; "
-            f"quadratic RMSE={fit['quad_rmse']:.6e}, R2={fit['quad_r2']:.6f}; "
-            f"better={fit['better']}"
+            f"Info: axis={axis}, fixed_{summary['fixed_label']}={summary['fixed_value']:.8f}, "
+            f"n_points={summary['n_points']}"
         )
+        for rank, fit in summary["fit_summaries"]:
+            print(
+                f"  pi rank {rank}: "
+                f"piecewise RMSE={fit['piecewise_rmse']:.6e}, R2={fit['piecewise_r2']:.6f}; "
+                f"quadratic RMSE={fit['quad_rmse']:.6e}, R2={fit['quad_r2']:.6f}; "
+                f"better={fit['better']}"
+            )
 
     meta = payload.get("meta", {})
     if meta:

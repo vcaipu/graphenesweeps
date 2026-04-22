@@ -9,6 +9,7 @@ import subprocess
 import os
 import re
 import shutil
+import glob
 import numpy as np
 import xml.etree.ElementTree as ET
 import pickle
@@ -112,13 +113,32 @@ def run_proj(inputfile,outputfile):
     inputfile = os.path.join(iodir, inputfile)
     outputfile = os.path.join(projdir, outputfile)
 
+    # Read QE prefix from proj input so we can clean projection byproducts.
+    qe_prefix = None
+    with open(inputfile, "r", encoding="utf-8", errors="ignore") as f:
+        proj_text = f.read()
+    m = re.search(r"prefix\s*=\s*'([^']+)'", proj_text, flags=re.IGNORECASE)
+    if m:
+        qe_prefix = m.group(1).strip()
+
     cmd = f"export OMP_NUM_THREADS=1; mpirun --bind-to none --oversubscribe -np 8 projwfc.x -nk 8 < {inputfile} > {outputfile} 2>&1"
     subprocess.run(cmd, shell=True, check=True)
 
     # Then pickle results
     proj_file_prefix = os.path.splitext(os.path.basename(outputfile))[0]
-    cmd = f"python visualize/parseproj.py --proj-out {proj_file_prefix} --pickle-only"
+    cmd = f"python visualize/parseproj.py --prefix {proj_file_prefix} --pickle-only"
     subprocess.run(cmd, shell=True, check=True)
+
+    # projwfc writes many PDOS side files in cwd; remove them after parsing.
+    if qe_prefix:
+        removed = 0
+        for pattern in [f"{qe_prefix}.pdos_*", f"{qe_prefix}.pdos_tot"]:
+            for path in glob.glob(pattern):
+                if os.path.isfile(path):
+                    os.remove(path)
+                    removed += 1
+        if removed > 0:
+            print(f"Cleaned {removed} projection byproduct files for prefix '{qe_prefix}'.")
 
 # def run_qe(inputfile, outputfile):
 #     pw_path = "pw.x"

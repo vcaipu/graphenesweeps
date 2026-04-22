@@ -1,0 +1,38 @@
+&CONTROL
+  calculation = 'relax'
+  prefix = 'graphene25.9'
+  outdir = './tmp' 
+  pseudo_dir = './'
+  verbosity = 'high'
+  etot_conv_thr = 1.0D-5
+  forc_conv_thr = 1.0D-4
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 40.0
+  nosym = .true.
+  noinv = .true.
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+  input_dft = 'PBE'
+/
+&ELECTRONS
+  conv_thr = 1.0D-8
+/
+&IONS
+  ion_dynamics = 'bfgs'
+/
+ATOMIC_SPECIES
+  C  12.011 C.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS {bohr}
+  5.824038  0.000000  0.000000
+  2.912019  3.834964  0.000000
+  0.000000  0.000000  28.346456
+ATOMIC_POSITIONS {crystal}
+  C  0.000112  -0.000141  0.000000 1 1 0
+  C  0.333221  0.333474  0.000000 1 1 0
+K_POINTS {automatic}
+  24 24 1 0 0 0

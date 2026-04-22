@@ -1,0 +1,264 @@
+
+     Program PROJWFC v.7.3.1 starts on 22Apr2026 at  7:58:41 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI & OpenMP), running on       8 processor cores
+     Number of MPI processes:                 8
+     Threads/MPI process:                     1
+
+     MPI processes distributed on     1 nodes
+     K-points division:     npool     =       8
+     28701 MiB available memory on the printing compute node when the environment starts
+
+
+     Reading xml data from directory:
+
+     ./tmp/graphene26.5upper.save/
+     file C.pbe-n-kjpaw_psl.1.0.0.UPF: wavefunction(s)  2S 2P renormalized
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum         291     291     95                22653    22653    4111
+
+     Using Slab Decomposition
+
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+Operating system error: Cannot allocate memory
+Memory allocation failure in xrealloc
+
+Error termination. Backtrace:
+#0  0x759139968960 in ???
+#1  0x7591399694d9 in ???
+#2  0x7591399696b4 in ???
+#3  0x759139967e6e in ???
+#4  0x759139bcb535 in ???
+#5  0x759139bbc389 in ???
+#6  0x759139bc922c in ???
+#7  0x759139bbfb84 in ???
+#8  0x759139bbfe05 in ???
+#9  0x571e75c61009 in ???
+#0  0x7e7daedb0960 in ???
+#1  0x7e7daedb14d9 in ???
+#2  0x7e7daedb16b4 in ???
+#3  0x7e7daedafe6e in ???
+#4  0x7e7daf013535 in ???
+#5  0x7e7daf004389 in ???
+#6  0x7e7daf01122c in ???
+#7  0x7e7daf007b84 in ???
+#8  0x7e7daf007e05 in ???
+#9  0x5cbbc8bb4009 in ???
+#10  0x5cbbc88b98ef in ???
+#11  0x5cbbc886016b in ???
+#12  0x5cbbc86e1261 in ???
+#13  0x5cbbc85dacb8 in ???
+#14  0x5cbbc85db8b6 in ???
+#15  0x5cbbc85c0f81 in ???
+#16  0x5cbbc85b1b7e in ???
+#0  0x773402560960 in ???
+#1  0x7734025614d9 in ???
+#2  0x7734025616b4 in ???
+#3  0x77340255fe6e in ???
+#4  0x7734027c3535 in ???
+#5  0x7734027b4389 in ???
+#6  0x7734027c122c in ???
+#7  0x7734027b7b84 in ???
+#8  0x7734027b7e05 in ???
+#9  0x564832c63009 in ???
+#10  0x5648329688ef in ???
+#11  0x56483290f16b in ???
+#12  0x564832790261 in ???
+#13  0x564832689cb8 in ???
+#14  0x56483268a8b6 in ???
+#15  0x56483266ff81 in ???
+#16  0x564832660b7e in ???
+#0  0x769531fa8960 in ???
+#1  0x769531fa94d9 in ???
+#2  0x769531fa96b4 in ???
+#3  0x769531fa7e6e in ???
+#4  0x76953220b535 in ???
+#5  0x7695321fc389 in ???
+#6  0x76953220922c in ???
+#7  0x7695321ffb84 in ???
+#8  0x7695321ffe05 in ???
+#9  0x602a596b5009 in ???
+#10  0x602a593ba8ef in ???
+#11  0x602a5936116b in ???
+#12  0x602a591e2261 in ???
+#13  0x602a590dbcb8 in ???
+#14  0x602a590dc8b6 in ???
+#15  0x602a590c1f81 in ???
+#16  0x602a590b2b7e in ???
+#0  0x7fb72d858960 in ???
+#1  0x7fb72d8594d9 in ???
+#2  0x7fb72d8596b4 in ???
+#3  0x7fb72d857e6e in ???
+#4  0x7fb72dabb535 in ???
+#5  0x7fb72daac389 in ???
+#6  0x7fb72dab922c in ???
+#7  0x7fb72daafb84 in ???
+#8  0x7fb72daafe05 in ???
+#9  0x57d836062009 in ???
+#10  0x57d835d678ef in ???
+#11  0x57d835d0e16b in ???
+#12  0x57d835b8f261 in ???
+#13  0x57d835a88cb8 in ???
+#14  0x57d835a898b6 in ???
+#15  0x57d835a6ef81 in ???
+#16  0x57d835a5fb7e in ???
+#10  0x571e759668ef in ???
+#11  0x571e7590d16b in ???
+#12  0x571e7578e261 in ???
+#13  0x571e75687cb8 in ???
+#14  0x571e756888b6 in ???
+#15  0x571e7566df81 in ???
+#16  0x571e7565eb7e in ???
+#0  0x77e932bd0960 in ???
+#1  0x77e932bd14d9 in ???
+#2  0x77e932bd16b4 in ???
+#3  0x77e932bcfe6e in ???
+#4  0x77e932e33535 in ???
+#17  0x759139429d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x759139429e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x571e7565ebb4 in ???
+#20  0xffffffffffffffff in ???
+#17  0x773402029d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x773402029e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x564832660bb4 in ???
+#20  0xffffffffffffffff in ???
+#17  0x7e7dae829d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x7e7dae829e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x5cbbc85b1bb4 in ???
+#20  0xffffffffffffffff in ???
+#5  0x77e932e24389 in ???
+#6  0x77e932e3122c in ???
+#7  0x77e932e27b84 in ???
+#8  0x77e932e27e05 in ???
+#9  0x5d9c87faf009 in ???
+#10  0x5d9c87cb48ef in ???
+#17  0x7fb72d229d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x7fb72d229e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x57d835a5fbb4 in ???
+#20  0xffffffffffffffff in ???
+#11  0x5d9c87c5b16b in ???
+#12  0x5d9c87adc261 in ???
+#13  0x5d9c879d5cb8 in ???
+#14  0x5d9c879d68b6 in ???
+#15  0x5d9c879bbf81 in ???
+#16  0x5d9c879acb7e in ???
+#17  0x769531a29d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x769531a29e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x602a590b2bb4 in ???
+#20  0xffffffffffffffff in ???
+#0  0x74d6825d0960 in ???
+#1  0x74d6825d14d9 in ???
+#2  0x74d6825d16b4 in ???
+#3  0x74d6825cfe6e in ???
+#4  0x74d682833535 in ???
+#5  0x74d682824389 in ???
+#6  0x74d68283122c in ???
+#7  0x74d682827b84 in ???
+#8  0x74d682827e05 in ???
+#17  0x77e932629d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x77e932629e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x5d9c879acbb4 in ???
+#20  0xffffffffffffffff in ???
+#9  0x5949772b1009 in ???
+#10  0x594976fb68ef in ???
+#11  0x594976f5d16b in ???
+#12  0x594976dde261 in ???
+#13  0x594976cd7cb8 in ???
+#14  0x594976cd88b6 in ???
+#15  0x594976cbdf81 in ???
+#16  0x594976caeb7e in ???
+#17  0x74d682029d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x74d682029e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x594976caebb4 in ???
+#20  0xffffffffffffffff in ???
+#0  0x78ce5ca28960 in ???
+#1  0x78ce5ca294d9 in ???
+#2  0x78ce5ca296b4 in ???
+#3  0x78ce5ca27e6e in ???
+#4  0x78ce5cc8b535 in ???
+#5  0x78ce5cc7c389 in ???
+#6  0x78ce5cc8922c in ???
+#7  0x78ce5cc7fb84 in ???
+#8  0x78ce5cc7fe05 in ???
+#9  0x59da9a4fe009 in ???
+#10  0x59da9a2038ef in ???
+#11  0x59da9a1aa16b in ???
+#12  0x59da9a02b261 in ???
+#13  0x59da99f24cb8 in ???
+#14  0x59da99f258b6 in ???
+#15  0x59da99f0af81 in ???
+#16  0x59da99efbb7e in ???
+#17  0x78ce5c429d8f in __libc_start_call_main
+	at ../sysdeps/nptl/libc_start_call_main.h:58
+#18  0x78ce5c429e3f in __libc_start_main_impl
+	at ../csu/libc-start.c:392
+#19  0x59da99efbbb4 in ???
+#20  0xffffffffffffffff in ???
+--------------------------------------------------------------------------
+
+prterun detected that one or more processes exited with non-zero status,
+thus causing the job to be terminated. The first process to do so was:
+
+   Process name: [prterun-cpu-dy-c7iflexlarge-1-4022@1,3]
+   Exit code:    1
+--------------------------------------------------------------------------

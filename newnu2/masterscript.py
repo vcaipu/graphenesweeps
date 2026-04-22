@@ -29,7 +29,7 @@ def calculate_strained_lattice(strain_pct):
 
     a = 4.625923576  # vc-relaxed lattice constant (Bohrs, for LDA functional)
     # a = 4.654           # Pristine graphene lattice constant (Bohr)
-    nu = 0.165          # Poisson ratio for free-standing graphene
+    nu = 0          # Poisson ratio for free-standing graphene
     c = 28.346456       # Vacuum gap in z-direction (Bohr)
     
     # --- Deformation Gradient Tensor Components ---
